@@ -73,7 +73,6 @@ app.get('/api/profile', function(req, res){
 });
 
 app.get('/api/projects', function(req, res){
-
   db.Project.find({}, function(err, allProjects) {
     if(err){ return console.log("error:", err)}
     else {
@@ -81,6 +80,15 @@ app.get('/api/projects', function(req, res){
     }
   });
 });
+
+app.get('/api/restaurants', function(req, res){
+  db.Restaurant.find({}, function(err, allRestaurants) {
+    if(err){ return console.log("error:", err)}
+    else {
+    res.json({ restaurants: allRestaurants });
+    }
+  });
+})
 /**********
  * SERVER *
  **********/
