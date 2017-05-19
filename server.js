@@ -1,7 +1,7 @@
 // require express and other modules
 var express = require('express'),
-    app = express();
-
+    app = express(),
+    seedData = require('./seedData.js');
 // parse incoming urlencoded form data
 // and populate the req.body object
 var bodyParser = require('body-parser');
@@ -130,6 +130,29 @@ app.get('/api/restaurants/:name', function (req, res) {
     if(err){return console.log(err)}
     res.json(foundRestaurant);
   })
+});
+
+app.get('/api/restart', function(req, res){
+  db.Restaurant.remove({}, function(err, deleted) {
+        console.log('removed all restaurants');
+  db.Restaurant.create(restaurants, function(err, restaurantsCreated){
+      if (err){
+        return console.log("Error:", err);
+      }
+      console.log("Added all Restaurants", restaurantsCreated);
+      db.Project.remove({}, function(err, deadprojects){
+        console.log('removed all projects');
+      db.Project.create(projects, function(err, projectsCreated){
+        if (err){
+          return console.log("Error:", err);
+        }
+
+        console.log("Added all Projects", projectsCreated);
+        process.exit(); // we're all done! Exit the program.
+        });
+      });
+    });
+  });
 });
 
 /**********

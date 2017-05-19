@@ -24,7 +24,7 @@ $('form').on('submit', function(e){
   e.preventDefault();
   $.ajax({
     method: "POST",
-    url: 'localhost:3000/api/restaurants',
+    url: 'https://glacial-brushlands-72768.herokuapp.com/api/restaurants',
     data: $(this).serializeArray(),
     success: postRestSuccess,
     error: onError
@@ -56,7 +56,7 @@ function onSuccess (json){
       <div class="caption">
         <h3>${json.name}</h3>
         <p>${json.githubUsername} click below to visit my portfolio</p>
-        <p><a href='https://www.${json.personalSiteLink}' class="btn btn-primary" role="button">GitHub</a></p>
+        <p><a href='http://www.${json.personalSiteLink}'' class="btn btn-primary" role="button">GitHub</a></p>
       </div>`;
       $('#profile').append(template);
 }
