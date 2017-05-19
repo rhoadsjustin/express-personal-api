@@ -19,7 +19,7 @@ app.use(function(req, res, next) {
  * DATABASE *
  ************/
 
-// var db = require('./models');
+var db = require('./models');
 
 /**********
  * ROUTES *
@@ -37,17 +37,6 @@ app.get('/', function homepage(req, res) {
   res.sendFile(__dirname + '/views/index.html');
 });
 
-app.get('/api/profile', function(req, res){
-  var profile = {
-      name: 'Justin Rhoads',
-      githubUsername: 'rhoadsjustin',
-      githubProfileImage: 'https://avatars3.githubusercontent.com/u/26558860?v=3&u=be873be42d6bd7ea2af15179adffa4f0ddee15e4&s=400',
-      personalSiteLink: 'rhoadsjustin.github.io',
-      currentCity: 'Austin, TX',
-      favoriteSportsTeams: [{name: 'Los Angelas Lakers', sport: 'basketball'}, {name: 'Arkansas Razorbacks', sport: 'football and basketball'}]
-    };
-    res.json(profile);
-});
 
 /*
  * JSON API Endpoints
@@ -64,11 +53,24 @@ app.get('/api', function apiIndex(req, res) {
     endpoints: [
       {method: "GET", path: "/api", description: "Describes all available endpoints"},
       {method: "GET", path: "/api/profile", description: "Data about me"}, // CHANGE ME
-      {method: "POST", path: "/api/restaurants", description: "Add a new favorite restaurant"} // CHANGE ME
+      {method: "GET", path: "/api/restaurants", description: "Get my favorite reastaurants"}
+      {method: "GET", path: "/api/projects", description: "Get my current projects"}// CHANGE ME
+      {method: "POST", path: "/api/restaurants", description: "Add a new favorite restaurant"}
     ]
   })
 });
 
+app.get('/api/profile', function(req, res){
+  var profile = {
+    name: 'Justin Rhoads',
+    githubUsername: 'rhoadsjustin',
+    githubProfileImage: 'https://avatars3.githubusercontent.com/u/26558860?v=3&u=be873be42d6bd7ea2af15179adffa4f0ddee15e4&s=400',
+    personalSiteLink: 'rhoadsjustin.github.io',
+    currentCity: 'Austin, TX',
+    favoriteSportsTeams: [{name: 'Los Angelas Lakers', sport: 'basketball'}, {name: 'Arkansas Razorbacks', sport: 'football and basketball'}]
+  };
+  res.json(profile);
+});
 /**********
  * SERVER *
  **********/

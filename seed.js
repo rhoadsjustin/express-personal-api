@@ -3,13 +3,35 @@
 
 var db = require('./models');
 
-var myProfile = {description: "Sharp rocks. Middle of nowhere."}
+var projects = [
+  {
+    name: 'Tic-Tac-Toe Game',
+    description: 'created a Tic-Tac-Toe game website with dummy AI',
+    githubRepoUrl: 'https://github.com/rhoadsjustin/tic-tac-toe',
+    deployedUrl: 'http://tictactoe-jr.bitballoon.com/',
+    screenshot: 'public/images/tictactoescreenshot.png',
+  },
+  {
+    name: 'JS Adventure game',
+    description: 'created a JavaScript adventure game',
+    githubRepoUrl: 'https://github.com/rhoadsjustin/js_adventure',
+    deployedUrl: 'none',
+    screenshot: 'public/images/jsadventurescreenshot.png',
+  },
+  {
+    name: 'GeoQuakes',
+    description: 'created a earthquake tracker by tapping into Google API and USGS earthquake API',
+    githubRepoUrl: 'https://github.com/rhoadsjustin/geoquakes',
+    deployedUrl: 'none',
+    screenshot: 'public/images/geoquakesscreenshot.png',
+  }
+]
 
-db.Profile.create(new_campsite, function(err, campsite){
+db.Project.create(projects, function(err, projectsCreated){
   if (err){
     return console.log("Error:", err);
   }
 
-  console.log("Created new campsite", campsite._id)
+  console.log("Added all Projects", projects);
   process.exit(); // we're all done! Exit the program.
 })
