@@ -48,21 +48,21 @@ var restaurants = [
 ];
 
 //add all seed restaurants
-db.Restaurant.remove({}, function(err, restaurants) {
+db.Restaurant.remove({}, function(err, deleted) {
       console.log('removed all restaurants');
 db.Restaurant.create(restaurants, function(err, restaurantsCreated){
     if (err){
       return console.log("Error:", err);
     }
-    console.log("Added all Restaurants", restaurants);
-    db.Project.remove({}, function(err, projects){
+    console.log("Added all Restaurants", restaurantsCreated);
+    db.Project.remove({}, function(err, deadprojects){
       console.log('removed all projects');
     db.Project.create(projects, function(err, projectsCreated){
       if (err){
         return console.log("Error:", err);
       }
 
-      console.log("Added all Projects", projects);
+      console.log("Added all Projects", projectsCreated);
       process.exit(); // we're all done! Exit the program.
       });
     });
