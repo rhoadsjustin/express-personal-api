@@ -53,14 +53,14 @@ db.Restaurant.create(restaurants, function(err, restaurantsCreated){
       return console.log("Error:", err);
     }
     console.log("Added all Restaurants", restaurants);
+    db.Project.create(projects, function(err, projectsCreated){
+      if (err){
+        return console.log("Error:", err);
+      }
+
+      console.log("Added all Projects", projects);
+      process.exit(); // we're all done! Exit the program.
+    });
   });
 
 //add all seed projects
-  db.Project.create(projects, function(err, projectsCreated){
-    if (err){
-      return console.log("Error:", err);
-    }
-
-    console.log("Added all Projects", projects);
-    process.exit(); // we're all done! Exit the program.
-  });
