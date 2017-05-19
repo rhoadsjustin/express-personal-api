@@ -71,6 +71,12 @@ app.get('/api/profile', function(req, res){
   };
   res.json(profile);
 });
+
+app.get('/api/projects', function(req, res){
+  db.Project.find({}, function(err, allTodos) {
+    res.json({ projects: allProjects });
+  });
+});
 /**********
  * SERVER *
  **********/
