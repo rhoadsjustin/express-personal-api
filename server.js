@@ -73,11 +73,12 @@ app.get('/api/profile', function(req, res){
 });
 
 app.get('/api/projects', function(req, res){
+
   db.Project.find({}, function(err, allProjects) {
-    if(err){ return console.log("error": err)}
+    if(err){ return console.log("error:", err)}
     else {
     res.json({ projects: allProjects });
-  }
+    }
   });
 });
 /**********
