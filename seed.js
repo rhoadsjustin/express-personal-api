@@ -48,7 +48,7 @@ var restaurants = [
 ]
 
 //add all seed restaurants
-db.Restaurant.remove({}, functin(err, restaurants){
+db.Restaurant.remove({}, function(err, restaurants){
   console.log('removed all restaurants');
   db.Restaurant.create(restaurants, function(err, restaurantsCreated){
     if (err){
