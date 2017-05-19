@@ -1,7 +1,7 @@
 // require express and other modules
 var express = require('express'),
-    app = express(),
-    seedData = require('./seedData.js');
+app = express(),
+seedData = require('./seedData.js');
 // parse incoming urlencoded form data
 // and populate the req.body object
 var bodyParser = require('body-parser');
@@ -16,22 +16,22 @@ app.use(function(req, res, next) {
 });
 
 /************
- * DATABASE *
- ************/
+* DATABASE *
+************/
 
 var db = require('./models');
 
 /**********
- * ROUTES *
- **********/
+* ROUTES *
+**********/
 
 // Serve static files from the `/public` directory:
 // i.e. `/images`, `/scripts`, `/styles`
 app.use(express.static('public'));
 
 /*
- * HTML Endpoints
- */
+* HTML Endpoints
+*/
 
 app.get('/', function homepage(req, res) {
   res.sendFile(__dirname + '/views/index.html');
@@ -39,8 +39,8 @@ app.get('/', function homepage(req, res) {
 
 
 /*
- * JSON API Endpoints
- */
+* JSON API Endpoints
+*/
 
 app.get('/api', function apiIndex(req, res) {
   // TODO: Document all your api endpoints below as a simple hardcoded JSON object.
@@ -76,7 +76,7 @@ app.get('/api/projects', function(req, res){
   db.Project.find({}, function(err, allProjects) {
     if(err){ return console.log("error:", err)}
     else {
-    res.json({ projects: allProjects });
+      res.json({ projects: allProjects });
     }
   });
 });
@@ -100,11 +100,11 @@ app.post('/api/restaurants', function (req, res) {
     description: req.body.description,
     address: req.body.address,
     rating: req.body.rating
-    })
-    newRestaurant.save(function(err, restaurant){
-  if (err) {
-    return console.log("save error: " + err);
-  }
+  })
+  newRestaurant.save(function(err, restaurant){
+    if (err) {
+      return console.log("save error: " + err);
+    }
     console.log("saved ", restaurant.name);
     // send back the restaurant
     res.json(restaurant);
@@ -117,7 +117,7 @@ app.get('/api/restaurants', function(req, res){
   db.Restaurant.find({}, function(err, allRestaurants) {
     if(err){ return console.log("error:", err)}
     else {
-    res.json({ restaurants: allRestaurants });
+      res.json({ restaurants: allRestaurants });
     }
   });
 })
@@ -134,21 +134,21 @@ app.get('/api/restaurants/:name', function (req, res) {
 
 app.get('/api/restart', function(req, res){
   db.Restaurant.remove({}, function(err, deleted) {
-        console.log('removed all restaurants');
-  db.Restaurant.create(restaurants, function(err, restaurantsCreated){
+    console.log('removed all restaurants');
+    db.Restaurant.create(seedData.restaurants, function(err, restaurantsCreated){
       if (err){
         return console.log("Error:", err);
       }
       console.log("Added all Restaurants", restaurantsCreated);
       db.Project.remove({}, function(err, deadprojects){
         console.log('removed all projects');
-      db.Project.create(projects, function(err, projectsCreated){
-        if (err){
-          return console.log("Error:", err);
-        }
+        db.Project.create(seedData.projects, function(err, projectsCreated){
+          if (err){
+            return console.log("Error:", err);
+          }
 
-        console.log("Added all Projects", projectsCreated);
-        process.exit(); // we're all done! Exit the program.
+          console.log("Added all Projects", projectsCreated);
+          res.redirect('/');
         });
       });
     });
@@ -156,8 +156,8 @@ app.get('/api/restart', function(req, res){
 });
 
 /**********
- * SERVER *
- **********/
+* SERVER *
+**********/
 
 // listen on the port that Heroku prescribes (process.env.PORT) OR port 3000
 app.listen(process.env.PORT || 3000, function () {
