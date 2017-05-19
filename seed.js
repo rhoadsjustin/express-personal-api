@@ -60,7 +60,7 @@ db.Restaurant.remove({}, function(err, restaurants){
 });
 
 //add all seed projects
-db.Project.remove({}, functin(err, projects){
+db.Project.remove({}, function(err, projects){
   console.log('removed all projects');
   db.Project.create(projects, function(err, projectsCreated){
     if (err){
