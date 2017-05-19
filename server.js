@@ -59,7 +59,7 @@ app.get('/api', function apiIndex(req, res) {
     ]
   })
 });
-
+//get the hardcoded profile
 app.get('/api/profile', function(req, res){
   var profile = {
     name: 'Justin Rhoads',
@@ -71,7 +71,7 @@ app.get('/api/profile', function(req, res){
   };
   res.json(profile);
 });
-
+//get all projects
 app.get('/api/projects', function(req, res){
   db.Project.find({}, function(err, allProjects) {
     if(err){ return console.log("error:", err)}
@@ -81,6 +81,38 @@ app.get('/api/projects', function(req, res){
   });
 });
 
+//find a project by title
+app.get('/api/projects/:title', function (req, res) {
+  // find one book by its id
+  var projectTitle = req.params.title;
+  db.Project.findOne({ title: projectTitle }, function(err, foundProject){
+    if(err){return console.log(err)}
+    res.json(foundProject);
+  })
+});
+
+//create a new restaurant
+app.post('/api/restaurants', function (req, res) {
+  // create new book with form data (`req.body`)
+  console.log("HIT POST");
+  var newRestaurant = new db.Restaurant({
+    name: req.body.name,
+    description: req.body.description,
+    address: req.body.address,
+    rating: req.body.rating
+    })
+    newRestaurant.save(function(err, restaurant){
+  if (err) {
+    return console.log("save error: " + err);
+  }
+    console.log("saved ", restaurant.name);
+    // send back the restaurant
+    res.json(restaurant);
+  })
+});
+
+
+//get all restaurants
 app.get('/api/restaurants', function(req, res){
   db.Restaurant.find({}, function(err, allRestaurants) {
     if(err){ return console.log("error:", err)}
@@ -89,6 +121,17 @@ app.get('/api/restaurants', function(req, res){
     }
   });
 })
+
+//get one restaurant by name
+app.get('/api/restaurants/:name', function (req, res) {
+  // find one book by its id
+  var restaurantName = req.params.name;
+  db.Restaurant.findOne({ name: restaurantName }, function(err, foundRestaurant){
+    if(err){return console.log(err)}
+    res.json(foundRestaurant);
+  })
+});
+
 /**********
  * SERVER *
  **********/
