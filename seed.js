@@ -3,9 +3,9 @@
 
 var db = require('./models');
 
-var new_campsite = {description: "Sharp rocks. Middle of nowhere."}
+var myProfile = {description: "Sharp rocks. Middle of nowhere."}
 
-db.Campsite.create(new_campsite, function(err, campsite){
+db.Profile.create(new_campsite, function(err, campsite){
   if (err){
     return console.log("Error:", err);
   }
