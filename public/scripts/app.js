@@ -9,6 +9,14 @@ $.ajax({
   success: onSuccess,
   error: onError
 })
+
+$.ajax({
+  method: "GET",
+  url: 'https://glacial-brushlands-72768.herokuapp.com/api/projects',
+  dataType: 'json',
+  success: projectSuccess,
+  error: onError
+})
 $('#restaurantButton').on('click', function(e){
   e.preventDefault();
   $.ajax({
@@ -48,6 +56,18 @@ function restaurantSuccess(json){
     $('#restaurants').append(template);
   }
 
+}
+
+function projectSuccess (json){
+  console.log(json);
+    for (var j = 0; j < json.projects.length; j++)
+  var template = `<img src="${json.projects[j].screenshot}" alt="project screenshot">
+      <div class="caption">
+        <h3>${json.projects[j].name}</h3>
+        <p>${json.projects[j].description}</p>
+        <p><a href='${json.projects[j].githubRepoUrl}' class="btn btn-primary" role="button">GitHub</a></p>
+      </div>`;
+      $('#projects').append(template);
 }
 
 function onSuccess (json){
