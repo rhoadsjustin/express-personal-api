@@ -4,21 +4,21 @@ module.exports.projects = [
     description: 'created a Tic-Tac-Toe game website with dummy AI',
     githubRepoUrl: 'https://github.com/rhoadsjustin/tic-tac-toe',
     deployedUrl: 'http://tictactoe-jr.bitballoon.com/',
-    screenshot: 'public/images/tictactoescreenshot.png',
+    screenshot: 'images/tictactoescreenshot.png',
   },
   {
     name: 'JS Adventure game',
     description: 'created a JavaScript adventure game',
     githubRepoUrl: 'https://github.com/rhoadsjustin/js_adventure',
     deployedUrl: 'none',
-    screenshot: 'public/images/jsadventurescreenshot.png',
+    screenshot: 'images/jsadventurescreenshot.png',
   },
   {
     name: 'GeoQuakes',
     description: 'created a earthquake tracker by tapping into Google API and USGS earthquake API',
     githubRepoUrl: 'https://github.com/rhoadsjustin/geoquakes',
     deployedUrl: 'none',
-    screenshot: 'public/images/geoquakesscreenshot.png',
+    screenshot: 'images/geoquakesscreenshot.png',
   }
 ];
 module.exports.restaurants = [

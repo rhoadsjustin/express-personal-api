@@ -60,7 +60,7 @@ function restaurantSuccess(json){
 
 function projectSuccess (json){
   console.log(json);
-    for (var j = 0; j < json.projects.length; j++)
+    for (var j = 0; j < json.projects.length; j++) {
   var template = `<img src="${json.projects[j].screenshot}" alt="project screenshot">
       <div class="caption">
         <h3>${json.projects[j].name}</h3>
@@ -68,6 +68,7 @@ function projectSuccess (json){
         <p><a href='${json.projects[j].githubRepoUrl}' class="btn btn-primary" role="button">GitHub</a></p>
       </div>`;
       $('#projects').append(template);
+}
 }
 
 function onSuccess (json){
