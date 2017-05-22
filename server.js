@@ -55,7 +55,8 @@ app.get('/api', function apiIndex(req, res) {
       {method: "GET", path: "/api/profile", description: "Data about me"}, // CHANGE ME
       {method: "GET", path: "/api/restaurants", description: "Get my favorite reastaurants"},
       {method: "GET", path: "/api/projects", description: "Get my current projects"},// CHANGE ME
-      {method: "POST", path: "/api/restaurants", description: "Add a new favorite restaurant"}
+      {method: "POST", path: "/api/restaurants", description: "Add a new favorite restaurant"},
+      {method: "GET", path: 'api/restaurants/:rating', description: 'Get restaurants by rating'}
     ]
   })
 });
@@ -131,6 +132,17 @@ app.get('/api/restaurants/:name', function (req, res) {
     res.json(foundRestaurant);
   })
 });
+
+//get restaurants by rating query
+app.get('/api/restaurants/:rating', function (req, res) {
+  var restaurantRating = req.params.rating;
+  var ratingNumber = restaurantRating.parseInt();
+  db.Restaurant.find({ rating: restaurantRating }, function(err, foundRestaurants){
+    if(err){return console.log(err)}
+    res.json(foundRestaurants);
+  })
+});
+
 
 app.get('/api/restart', function(req, res){
   db.Restaurant.remove({}, function(err, deleted) {
