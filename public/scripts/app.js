@@ -37,6 +37,7 @@ $('form').on('submit', function(e){
     success: postRestSuccess,
     error: onError
   })
+  console.log($(this).serializeArray());
 })
 
 function postRestSuccess (json){
@@ -47,6 +48,7 @@ function restaurantSuccess(json){
   console.log(json.restaurants);
   $('#restaurants').empty();
   $('#profile').empty();
+  $('#projects').empty();
   for (var i = 0; i < json.restaurants.length; i++) {
     var template = `<div class="caption">
                     <h3>${json.restaurants[i].name}</h3>
