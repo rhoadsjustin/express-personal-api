@@ -33,7 +33,7 @@ $('form').on('submit', function(e){
   $.ajax({
     method: "POST",
     url: 'https://glacial-brushlands-72768.herokuapp.com/api/restaurants',
-    data: $('form').serializeArray(),
+    data: $('form').serialize(),
     success: postRestSuccess,
     error: onError
   })

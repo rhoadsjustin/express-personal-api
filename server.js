@@ -143,7 +143,22 @@ app.get('/api/restaurants/:rating', function (req, res) {
   })
 });
 
+//delete one restaurant
+app.delete('/api/restaurants/:id', function (req, res) {
+  // get book id from url params (`req.params`)
+  console.log('books delete', req.params);
+  var restaurantIndex = req.params.id;
+  // find the index of the book we want to remove
+  var deleteRestaurantIndex = restaurants.findIndex(function(element, index) {
+    return (element._id === parseInt(req.params.id)); //params are strings
+  });
+  console.log('deleting restaurant with index', deleteRestaurantIndex);
+  var restaurantToDelete = restaurants[deleteRestaurantIndex];
+  books.splice(deleteRestuarantIndex, 1);
+  res.json(restaurantToDelete);
+});
 
+//restart from the seed data to fix undefined
 app.get('/api/restart', function(req, res){
   db.Restaurant.remove({}, function(err, deleted) {
     console.log('removed all restaurants');
